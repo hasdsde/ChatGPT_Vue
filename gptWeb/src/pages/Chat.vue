@@ -21,17 +21,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { route } from 'quasar/wrappers';
 import { api } from 'src/boot/axios';
 import { CommonSuccess } from 'src/components/Result';
-import router from 'src/router';
-import { onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 const text = ref('')
-const openid = 'oZGPM6iQs55RZ1SWIorjsOGw6smo'
+let openid: any = ''
 let pageCount = 10;
 let dialog: any = ref([])
 const chat: any = ref(null);
+
 function loadPage() {
   checkUser()
   getHisttory()
@@ -53,6 +52,8 @@ function checkUser() {
     console.log('用户信息为空');
     // window.location.href = '/login'
     useRouter().push('/login')
+  } else {
+    openid = localStorage.getItem('openid')
   }
 }
 
@@ -70,15 +71,6 @@ function getHisttory() {
   })
 }
 
-
-
-function getScrollTarget(el: any) {
-  throw new Error('Function not implemented.');
-}
-
-function setVerticalScrollPosition(target: void, offset: number, duration: number) {
-  throw new Error('Function not implemented.');
-}
 </script>
 
 <style>

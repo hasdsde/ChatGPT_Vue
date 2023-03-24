@@ -32,21 +32,22 @@ let password = ref('')
 //登录
 function handleLogin() {
   localStorage.clear()
-  axios.post("/api/user/login", {
+  axios.post("http://localhost:8888/web_login", {
     "username": username.value,
     "password": password.value
   }).then((res: any) => {
-    if (res.data.code === 200) {
-      localStorage.setItem("score", res.data.data.score)
-      localStorage.setItem("username", res.data.data.username)
+    if (res.data.length > 0) {
+      localStorage.setItem("username", username.value)
+      localStorage.setItem('openid', res.data[0].open_id)
       // localStorage.setItem("token", res.data.token)
       // localStorage.setItem("useravatar", res.data.avatar)
       CommonSuccess('登录成功')
       rt.push('/')
     } else {
-      CommonFail('错误:' + res.data.code + '  信息：' + res.data.msg)
+      CommonFail('登录失败')
     }
-  })
+  }
+  )
 }
 //注册
 function handleRegister() {
