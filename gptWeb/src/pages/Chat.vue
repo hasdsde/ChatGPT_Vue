@@ -21,15 +21,19 @@
   </div>
 </template>
 <script setup lang="ts">
+import { route } from 'quasar/wrappers';
 import { api } from 'src/boot/axios';
 import { CommonSuccess } from 'src/components/Result';
+import router from 'src/router';
 import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 const text = ref('')
 const openid = 'oZGPM6iQs55RZ1SWIorjsOGw6smo'
 let pageCount = 10;
 let dialog: any = ref([])
 const chat: any = ref(null);
 function loadPage() {
+  checkUser()
   getHisttory()
   CommonSuccess('刷新完成')
 }
@@ -44,6 +48,13 @@ function sendMessage() {
   })
 }
 
+function checkUser() {
+  if (localStorage.getItem('openid') == undefined || localStorage.getItem('openid') == '') {
+    console.log('用户信息为空');
+    // window.location.href = '/login'
+    useRouter().push('/login')
+  }
+}
 
 
 function refresh(done: any) {
