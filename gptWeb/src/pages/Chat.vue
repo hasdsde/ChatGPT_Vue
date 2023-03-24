@@ -15,7 +15,7 @@
 
   <div class="fixed-bottom bg-grey-2  " style="margin-bottom: 5vh;text-align: center;">
     <div class="q-pa-md">
-      <q-input class="sent" style="width: 70vw" dense outlined v-model="text" />
+      <q-input class="sent" style="width: 70vw" dense outlined v-model="text" :readonly="loading" />
       <!-- <q-btn class="sent q-ml-sm" color="primary" label="发送" @click="sendMessage" /> -->
       <q-btn :loading="loading" class="sent q-ml-sm" color="primary" @click="simulateProgress" label="发送" />
     </div>
@@ -65,6 +65,7 @@ function checkTemplate() {
   if (localStorage.getItem('genStr')?.length > 0) {
     // @ts-ignore
     text.value = localStorage.getItem('genStr')
+    simulateProgress()
   }
 }
 
