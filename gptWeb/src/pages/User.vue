@@ -88,7 +88,6 @@ function onSubmit() {
   } else {
     CommonWarn('两次输入不一致')
   }
-
 }
 
 function onReset() {
@@ -117,8 +116,6 @@ function changeUserName() {
       CommonSuccess('修改成功')
       getUserInfo()
     })
-
-
   }).onCancel(() => {
     // console.log('>>>> Cancel')
   }).onDismiss(() => {

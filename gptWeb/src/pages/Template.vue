@@ -37,11 +37,12 @@
 <script setup lang="ts">
 import { api } from 'src/boot/axios';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 const sort: any = ref('')
 const tempaltes: any = ref('')
 const prompt = ref(false)
 const currentItem: any = ref([])
-
+const rt = useRouter()
 function loadPage() {
   getSrot()
 }
@@ -54,8 +55,8 @@ function getResult() {
   currentItem.value.forEach((element: any) => {
     generateStr += element.text + ':' + element.value + " "
   });
-  console.log(generateStr);
   localStorage.setItem("genStr", generateStr)
+  rt.push('/')
 }
 
 // 点击弹窗
