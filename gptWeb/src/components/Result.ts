@@ -9,7 +9,7 @@ export function CommonSuccess(msg: string) {
     type: 'positive',
     message: msg,
     position: 'top',
-    group: false
+    group: false,
   })
 }
 export function CommonWarn(msg: string) {

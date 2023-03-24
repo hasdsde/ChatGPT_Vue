@@ -1,5 +1,5 @@
-<template >
-  <div ref="chat">
+<template>
+  <q-pull-to-refresh @refresh="refresh">
     <div class="q-pa-md row justify-center" v-for="(item, index) in dialog" :key="index">
       <div style="width: 100%; ">
         <q-chat-message name="用户" avatar="src/assets/user.jpg" :text="[item.content]" :sent="item.is_user == 1"
@@ -8,9 +8,11 @@
           v-if="item.is_user == 0" />
       </div>
     </div>
-  </div>
+  </q-pull-to-refresh>
+
   <div style="height: 6vh;">
   </div>
+
   <div class="fixed-bottom bg-grey-2  " style="margin-bottom: 5vh;text-align: center;">
     <div class="q-pa-md">
       <q-input class="sent" style="width: 75vw" dense outlined v-model="text" />
@@ -20,6 +22,7 @@
 </template>
 <script setup lang="ts">
 import { api } from 'src/boot/axios';
+import { CommonSuccess } from 'src/components/Result';
 import { onMounted, ref } from 'vue';
 const text = ref('')
 const openid = 'oZGPM6iQs55RZ1SWIorjsOGw6smo'
@@ -28,6 +31,7 @@ let dialog: any = ref([])
 const chat: any = ref(null);
 function loadPage() {
   getHisttory()
+  CommonSuccess('刷新完成')
 }
 loadPage()
 
@@ -36,16 +40,17 @@ function sendMessage() {
     'sendMessage': text.value,
     'userid': openid
   }).then((res: any) => {
-    console.log(res.data);
+    loadPage()
   })
 }
 
-onMounted(() => {
-  chat.value.scrollTop = 1000
-
-});
 
 
+function refresh(done: any) {
+  pageCount += 10
+  loadPage()
+  done()
+}
 
 
 function getHisttory() {
