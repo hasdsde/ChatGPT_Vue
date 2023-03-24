@@ -13,8 +13,13 @@
   </div>
 </template>
 <script setup lang="ts">
+import { api } from 'src/boot/axios';
 import { ref } from 'vue';
 const text = ref('')
+
+function getHisttory() {
+  api.get('/his')
+}
 
 
 </script>

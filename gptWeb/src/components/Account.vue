@@ -2,7 +2,7 @@
   <q-avatar class="q-mr-sm">
     <img src="https://cdn.quasar.dev/img/avatar.png">
   </q-avatar>
-  <div class="q-mr-sm">小二今天吃啥啊</div>
+  <div class="q-mr-sm">这是用户名</div>
   <q-btn color="secondary" size="sm" label="选项">
     <q-menu>
       <q-list style="min-width: 100px">
